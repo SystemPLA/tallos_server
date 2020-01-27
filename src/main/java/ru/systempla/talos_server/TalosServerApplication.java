@@ -1,13 +1,13 @@
-package ru.systempla.tallos_server;
+package ru.systempla.talos_server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TallosServerApplication {
+public class TalosServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TallosServerApplication.class, args);
+		SpringApplication.run(TalosServerApplication.class, args);
 	}
 
 }

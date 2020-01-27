@@ -11,7 +11,7 @@
 	<groupId>ru.systempla</groupId>
 	<artifactId>tallos_server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>tallos_server</name>
+	<name>talos_server</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
