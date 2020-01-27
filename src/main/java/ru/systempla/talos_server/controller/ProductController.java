@@ -8,7 +8,10 @@ import ru.systempla.talos_server.model.Product;
 import ru.systempla.talos_server.service.ProductService;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
+@RequestMapping("api/v1/products")
 @RestController
 public class ProductController {
 
@@ -19,13 +22,13 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping(value = "/products")
+    @PostMapping
     public ResponseEntity<?> create(@RequestBody Product product) {
         productService.create(product);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/products")
+    @GetMapping
     public ResponseEntity<List<Product>> read() {
         final List<Product> products = productService.readAll();
 
@@ -34,29 +37,29 @@ public class ProductController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/products/{id}")
-    public ResponseEntity<Product> read(@PathVariable(name = "id") int id) {
-        final Product product = productService.read(id);
+    @GetMapping(value = "{id}")
+    public ResponseEntity<Optional<Product>> read(@PathVariable(name = "id") UUID id) {
+        final Optional<Product> product = productService.read(id);
 
-        return product != null
+        return !product.isEmpty()
                 ? new ResponseEntity<>(product, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(value = "/products/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") int id, @RequestBody Product product) {
-        final boolean updated = productService.update(product, id);
+    @PutMapping(value = "{id}")
+    public ResponseEntity<?> update(@PathVariable(name = "id") UUID id, @RequestBody Product product) {
+        final int updated = productService.update(product, id);
 
-        return updated
+        return updated==1
                 ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-    @DeleteMapping(value = "/products/{id}")
-    public ResponseEntity<?> delete(@PathVariable(name = "id") int id) {
-        final boolean deleted = productService.delete(id);
+    @DeleteMapping(value = "{id}")
+    public ResponseEntity<?> delete(@PathVariable(name = "id") UUID id) {
+        final int deleted = productService.delete(id);
 
-        return deleted
+        return deleted==1
                 ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }

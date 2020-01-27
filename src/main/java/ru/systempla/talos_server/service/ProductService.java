@@ -3,14 +3,17 @@ package ru.systempla.talos_server.service;
 import ru.systempla.talos_server.model.Product;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface ProductService {
 
     /**
      * Создает новый продукт
      * @param product - продукт для создания
+     * @return - 1 если продукт был добавлен
      */
-    void create(Product product);
+    int create(Product product);
 
     /**
      * Возвращает список всех имеющихся продуктов
@@ -21,24 +24,24 @@ public interface ProductService {
     /**
      * Возвращает клиента по его ID
      * @param id - ID продукта
-     * @return - объект клиента с заданным ID
+     * @return - объект клиента с заданным ID, иначе null
      */
-    Product read(int id);
+    Optional<Product> read(UUID id);
 
     /**
      * Обновляет продукт с заданным ID,
      * в соответствии с переданным продуктом
      * @param product - продукт в соответсвии с которым нужно обновить данные
      * @param id - id продукта который нужно обновить
-     * @return - true если данные были обновлены, иначе false
+     * @return - 1 если продукт был обновлён, иначе 0
      */
-    boolean update(Product product, int id);
+    int update(Product product, UUID id);
 
     /**
      * Удаляет продукт с заданным ID
      * @param id - id продукта, который нужно удалить
-     * @return - true если продукт был удален, иначе false
+     * @return - 1 если продукт был удален, иначе 0
      */
-    boolean delete(int id);
+    int delete(UUID id);
 }
 

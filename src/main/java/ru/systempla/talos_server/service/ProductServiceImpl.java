@@ -1,53 +1,47 @@
 package ru.systempla.talos_server.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import ru.systempla.talos_server.dao.ProductDao;
 import ru.systempla.talos_server.model.Product;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ProductServiceImpl implements ProductService{
 
-    // Хранилище
-    private static final Map<Integer, Product> PRODUCT_REPOSITORY_MAP = new HashMap<>();
+    private final ProductDao productDao;
 
-    // Переменная для генерации ID продукта
-    private static final AtomicInteger PRODUCT_ID_HOLDER = new AtomicInteger();
+    @Autowired
+    public ProductServiceImpl(@Qualifier("fakeDao") ProductDao productDao){
+        this.productDao = productDao;
+    }
 
     @Override
-    public void create(Product product) {
-        final int productId = PRODUCT_ID_HOLDER.incrementAndGet();
-        product.setId(productId);
-        PRODUCT_REPOSITORY_MAP.put(productId, product);
+    public int create(Product product) {
+        return productDao.insertProduct(product);
     }
 
     @Override
     public List<Product> readAll() {
-        return new ArrayList<>(PRODUCT_REPOSITORY_MAP.values());
+        return productDao.selectAllProducts();
     }
 
     @Override
-    public Product read(int id) {
-        return PRODUCT_REPOSITORY_MAP.get(id);
+    public Optional<Product> read(UUID id) {
+        return productDao.selectProductById(id) ;
     }
 
     @Override
-    public boolean update(Product product, int id) {
-        if (PRODUCT_REPOSITORY_MAP.containsKey(id)) {
-            product.setId(id);
-            PRODUCT_REPOSITORY_MAP.put(id, product);
-            return true;
-        }
-
-        return false;
+    public int update(Product product, UUID id) {
+        return productDao.updateProductById(id, product);
     }
 
     @Override
-    public boolean delete(int id) {
-        return PRODUCT_REPOSITORY_MAP.remove(id) != null;
+    public int delete(UUID id) {
+        return productDao.deleteProductById(id);
     }
 }

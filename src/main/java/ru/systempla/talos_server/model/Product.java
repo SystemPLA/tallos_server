@@ -1,50 +1,41 @@
 package ru.systempla.talos_server.model;
 
+import java.util.UUID;
+
 public class Product {
 
-    private Integer id;
+    private final UUID id;
+
     private String name;
     private String source;
     private String status;
     private long count;
 
-    public Integer getId() {
-        return id;
+    public Product(UUID id, String name, String source, String status, long count) {
+        this.id = id;
+        this.name = name;
+        this.source = source;
+        this.status = status;
+        this.count = count;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public UUID getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getSource() {
         return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public long getCount() {
         return count;
-    }
-
-    public void setCount(long count) {
-        this.count = count;
     }
 }
