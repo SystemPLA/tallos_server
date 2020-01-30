@@ -52,4 +52,28 @@ public class InfoData {
     public float getPriceDzsl() {
         return priceDzsl;
     }
+
+    public void setInfoId(int infoId) {
+        this.infoId = infoId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
+
+    public void setPriceSv(float priceSv) {
+        this.priceSv = priceSv;
+    }
+
+    public void setPriceRin(float priceRin) {
+        this.priceRin = priceRin;
+    }
+
+    public void setPriceDzsl(float priceDzsl) {
+        this.priceDzsl = priceDzsl;
+    }
 }

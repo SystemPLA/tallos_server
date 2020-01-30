@@ -10,7 +10,7 @@ import java.util.UUID;
 @Table(name = "products")
 public class Product {
 
-    private final UUID id;
+    private UUID id;
 
     private String name;
     private String source;
@@ -48,6 +48,10 @@ public class Product {
     @Column(name = "product_count", nullable = false)
     public long getCount() {
         return count;
+    }
+
+    public void setId(UUID uuid) {
+        this.id = uuid;
     }
 
     public void setName(String name) {
