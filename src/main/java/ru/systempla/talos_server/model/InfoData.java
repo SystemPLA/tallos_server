@@ -6,15 +6,17 @@ import javax.persistence.*;
 @Table(name = "info_data")
 public class InfoData {
 
-    private int infoId;
+    private Integer infoId;
     private String name;
     private float weight;
     private float priceSv;
     private float priceRin;
     private float priceDzsl;
 
-    public InfoData(int infoId, String name, float weight, float priceSv, float priceRin, float priceDzsl) {
-        this.infoId = infoId;
+    public InfoData() {
+    }
+
+    public InfoData(String name, float weight, float priceSv, float priceRin, float priceDzsl) {
         this.name = name;
         this.weight = weight;
         this.priceSv = priceSv;
@@ -24,7 +26,7 @@ public class InfoData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getInfoId() {
+    public Integer getInfoId() {
         return infoId;
     }
 
@@ -53,7 +55,7 @@ public class InfoData {
         return priceDzsl;
     }
 
-    public void setInfoId(int infoId) {
+    public void setInfoId(Integer infoId) {
         this.infoId = infoId;
     }
 

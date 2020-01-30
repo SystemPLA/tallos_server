@@ -16,7 +16,7 @@ public class ProductServiceImpl implements ProductService{
     private final ProductDao productDao;
 
     @Autowired
-    public ProductServiceImpl(@Qualifier("fakeDao") ProductDao productDao){
+    public ProductServiceImpl(@Qualifier("PostgresProductDao") ProductDao productDao){
         this.productDao = productDao;
     }
 
