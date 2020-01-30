@@ -1,40 +1,52 @@
 package ru.systempla.talos_server.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import ru.systempla.talos_server.model.Product;
+import ru.systempla.talos_server.repository.ProductsRepository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Repository("PostresProductDao")
 public class PostgreSqlProductDataAccessService implements ProductDao {
+
+    @Autowired
+    private ProductsRepository productsRepository;
 
     @Override
     public int insertProduct(UUID id, Product product) {
-        return 0;
-    }
-
-    @Override
-    public int insertProduct(Product product) {
-        return 0;
+        productsRepository.save(new Product(id, product.getName(), product.getSource(), product.getStatus(), product.getCount()));
+        return 1;
     }
 
     @Override
     public List<Product> selectAllProducts() {
-        return null;
+        return productsRepository.findAll();
     }
 
     @Override
     public Optional<Product> selectProductById(UUID id) {
-        return Optional.empty();
+       return productsRepository.findById(id);
     }
 
     @Override
     public int deleteProductById(UUID id) {
-        return 0;
+        Optional<Product> result = productsRepository.findById(id);
+        if (result.isEmpty()) {
+            return 0;
+        } else {
+            productsRepository.delete(result.get());
+            return 1;
+        }
     }
 
     @Override
     public int updateProductById(UUID id, Product update) {
-        return 0;
+        Optional<Product> result = selectProductById(id);
+        if (result.isEmpty()) return 0;
+        insertProduct(id, update);
+        return 1;
     }
 }
