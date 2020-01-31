@@ -1,6 +1,7 @@
 package ru.systempla.talos_server.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -9,9 +10,9 @@ public class Order {
 
     private Integer orderId;
     private String clientName;
-    private Date creationDate;
-    private Date acceptionDate;
-    private Date returnDate;
+    private LocalDate creationDate;
+    private LocalDate acceptionDate;
+    private LocalDate returnDate;
     private long typeOneCount;
     private long typeTwoCount;
     private long typeThreeCount;
@@ -21,7 +22,10 @@ public class Order {
     private long typeSevenCount;
     private String orderStatus;
 
-    public Order(Integer orderId, String clientName, Date creationDate, Date acceptionDate, Date returnDate,
+    public Order() {
+    }
+
+    public Order(Integer orderId, String clientName, LocalDate creationDate, LocalDate acceptionDate, LocalDate returnDate,
                  long typeOneCount, long typeTwoCount, long typeThreeCount, long typeFourCount, long typeFiveCount,
                  long typeSixCount, long typeSevenCount, String orderStatus) {
         this.orderId = orderId;
@@ -52,51 +56,51 @@ public class Order {
     }
 
     @Column(name = "creation_date", nullable = false)
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
     @Column(name = "acception_date")
-    public Date getAcceptionDate() {
+    public LocalDate getAcceptionDate() {
         return acceptionDate;
     }
 
     @Column(name = "return_date")
-    public Date getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    @Column(name = "1_count", nullable = false)
+    @Column(name = "count_one", nullable = false)
     public long getTypeOneCount() {
         return typeOneCount;
     }
 
-    @Column(name = "2_count", nullable = false)
+    @Column(name = "count_two", nullable = false)
     public long getTypeTwoCount() {
         return typeTwoCount;
     }
 
-    @Column(name = "3_count", nullable = false)
+    @Column(name = "count_three", nullable = false)
     public long getTypeThreeCount() {
         return typeThreeCount;
     }
 
-    @Column(name = "4_count", nullable = false)
+    @Column(name = "count_four", nullable = false)
     public long getTypeFourCount() {
         return typeFourCount;
     }
 
-    @Column(name = "5_count", nullable = false)
+    @Column(name = "count_five", nullable = false)
     public long getTypeFiveCount() {
         return typeFiveCount;
     }
 
-    @Column(name = "6_count", nullable = false)
+    @Column(name = "count_six", nullable = false)
     public long getTypeSixCount() {
         return typeSixCount;
     }
 
-    @Column(name = "7_count", nullable = false)
+    @Column(name = "count_seven", nullable = false)
     public long getTypeSevenCount() {
         return typeSevenCount;
     }
@@ -114,15 +118,15 @@ public class Order {
         this.clientName = clientName;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
-    public void setAcceptionDate(Date acceptionDate) {
+    public void setAcceptionDate(LocalDate acceptionDate) {
         this.acceptionDate = acceptionDate;
     }
 
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 
