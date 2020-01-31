@@ -12,8 +12,8 @@ public class FakeProductDataAccessService implements ProductDao {
     private static List<Product> DB = new ArrayList<>();
 
     @Override
-    public int insertProduct(UUID id, Product product) {
-        DB.add(new Product(id, product.getName(), product.getSource(), product.getStatus(), product.getCount()));
+    public int insertProduct(Product product) {
+        DB.add(product);
         return 1;
     }
 
@@ -23,14 +23,14 @@ public class FakeProductDataAccessService implements ProductDao {
     }
 
     @Override
-    public Optional<Product> selectProductById(UUID id) {
+    public Optional<Product> selectProductById(Integer id) {
         return DB.stream()
                 .filter(product -> product.getId().equals(id))
                 .findFirst();
     }
 
     @Override
-    public int deleteProductById(UUID id) {
+    public int deleteProductById(Integer id) {
         Optional<Product> productMaybe = selectProductById(id);
         if (!productMaybe.isPresent()){
             return 0;
@@ -40,7 +40,7 @@ public class FakeProductDataAccessService implements ProductDao {
     }
 
     @Override
-    public int updateProductById(UUID id, Product update) {
+    public int updateProductById(Integer id, Product update) {
         return selectProductById(id)
                 .map(product -> {
                     int indexOfProductToUpdate = DB.indexOf(product);

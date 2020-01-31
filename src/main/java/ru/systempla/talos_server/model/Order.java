@@ -1,17 +1,13 @@
 package ru.systempla.talos_server.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity
 @Table(name = "orders")
 public class Order {
 
-    private UUID orderId;
+    private Integer orderId;
     private String clientName;
     private Date creationDate;
     private Date acceptionDate;
@@ -25,7 +21,7 @@ public class Order {
     private long typeSevenCount;
     private String orderStatus;
 
-    public Order(UUID orderId, String clientName, Date creationDate, Date acceptionDate, Date returnDate,
+    public Order(Integer orderId, String clientName, Date creationDate, Date acceptionDate, Date returnDate,
                  long typeOneCount, long typeTwoCount, long typeThreeCount, long typeFourCount, long typeFiveCount,
                  long typeSixCount, long typeSevenCount, String orderStatus) {
         this.orderId = orderId;
@@ -44,7 +40,9 @@ public class Order {
     }
 
     @Id
-    public UUID getOrderId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id", nullable = false)
+    public Integer getOrderId() {
         return orderId;
     }
 
@@ -108,7 +106,7 @@ public class Order {
         return orderStatus;
     }
 
-    public void setOrderId(UUID orderId) {
+    public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 

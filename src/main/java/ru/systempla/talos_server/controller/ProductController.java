@@ -39,7 +39,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<Optional<Product>> read(@PathVariable(name = "id") UUID id) {
+    public ResponseEntity<Optional<Product>> read(@PathVariable(name = "id") Integer id) {
         final Optional<Product> product = productService.read(id);
 
         return !product.isEmpty()
@@ -48,7 +48,7 @@ public class ProductController {
     }
 
     @PutMapping(value = "{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") UUID id, @Valid @RequestBody Product product) {
+    public ResponseEntity<?> update(@PathVariable(name = "id") Integer id, @Valid @RequestBody Product product) {
         final int updated = productService.update(product, id);
 
         return updated==1
@@ -57,7 +57,7 @@ public class ProductController {
     }
 
     @DeleteMapping(value = "{id}")
-    public ResponseEntity<?> delete(@PathVariable(name = "id") UUID id) {
+    public ResponseEntity<?> delete(@PathVariable(name = "id") Integer id) {
         final int deleted = productService.delete(id);
 
         return deleted==1

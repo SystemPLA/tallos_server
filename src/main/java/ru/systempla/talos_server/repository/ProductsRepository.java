@@ -7,5 +7,5 @@ import ru.systempla.talos_server.model.Product;
 import java.util.UUID;
 
 @Repository
-public interface ProductsRepository extends JpaRepository<Product, UUID> {
+public interface ProductsRepository extends JpaRepository<Product, Integer> {
 }

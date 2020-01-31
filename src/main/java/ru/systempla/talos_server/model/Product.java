@@ -1,23 +1,22 @@
 package ru.systempla.talos_server.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.UUID;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
 public class Product {
 
-    private UUID id;
+    private Integer id;
 
     private String name;
     private String source;
     private String status;
     private long count;
 
-    public Product(UUID id, String name, String source, String status, long count) {
+    public Product() {
+    }
+
+    public Product(Integer id, String name, String source, String status, long count) {
         this.id = id;
         this.name = name;
         this.source = source;
@@ -26,7 +25,9 @@ public class Product {
     }
 
     @Id
-    public UUID getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id", nullable = false)
+    public Integer getId() {
         return id;
     }
 
@@ -50,8 +51,8 @@ public class Product {
         return count;
     }
 
-    public void setId(UUID uuid) {
-        this.id = uuid;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setName(String name) {

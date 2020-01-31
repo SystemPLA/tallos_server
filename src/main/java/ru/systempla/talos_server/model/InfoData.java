@@ -16,7 +16,8 @@ public class InfoData {
     public InfoData() {
     }
 
-    public InfoData(String name, float weight, float priceSv, float priceRin, float priceDzsl) {
+    public InfoData(Integer infoId, String name, float weight, float priceSv, float priceRin, float priceDzsl) {
+        this.infoId = infoId;
         this.name = name;
         this.weight = weight;
         this.priceSv = priceSv;
@@ -26,6 +27,7 @@ public class InfoData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "info_id", nullable = false)
     public Integer getInfoId() {
         return infoId;
     }

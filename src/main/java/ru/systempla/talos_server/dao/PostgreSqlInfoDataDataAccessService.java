@@ -19,8 +19,7 @@ public class PostgreSqlInfoDataDataAccessService implements InfoDataDao {
 
     @Override
     public int insertProduct(InfoData infoData) {
-        infoDatasRepository.save(new InfoData(infoData.getName(), infoData.getWeight(),
-                infoData.getPriceSv(), infoData.getPriceRin(), infoData.getPriceDzsl()));
+        infoDatasRepository.save(infoData);
         return 1;
     }
 
@@ -49,7 +48,8 @@ public class PostgreSqlInfoDataDataAccessService implements InfoDataDao {
     public int updateProductById(Integer id, InfoData update) {
         Optional<InfoData> result = selectProductById(id);
         if (result.isEmpty()) return 0;
-        infoDatasRepository.save(update);
+        infoDatasRepository.save(new InfoData(id, update.getName(), update.getWeight(),
+                update.getPriceSv(), update.getPriceRin(), update.getPriceDzsl()));
         return 1;
     }
 }

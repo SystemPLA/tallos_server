@@ -7,7 +7,6 @@ import ru.systempla.talos_server.repository.ProductsRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository("PostgresProductDao")
 public class PostgreSqlProductDataAccessService implements ProductDao {
@@ -16,8 +15,8 @@ public class PostgreSqlProductDataAccessService implements ProductDao {
     private ProductsRepository productsRepository;
 
     @Override
-    public int insertProduct(UUID id, Product product) {
-        productsRepository.save(new Product(id, product.getName(), product.getSource(), product.getStatus(), product.getCount()));
+    public int insertProduct(Product product) {
+        productsRepository.save(product);
         return 1;
     }
 
@@ -27,12 +26,12 @@ public class PostgreSqlProductDataAccessService implements ProductDao {
     }
 
     @Override
-    public Optional<Product> selectProductById(UUID id) {
+    public Optional<Product> selectProductById(Integer id) {
        return productsRepository.findById(id);
     }
 
     @Override
-    public int deleteProductById(UUID id) {
+    public int deleteProductById(Integer id) {
         Optional<Product> result = productsRepository.findById(id);
         if (result.isEmpty()) {
             return 0;
@@ -43,10 +42,11 @@ public class PostgreSqlProductDataAccessService implements ProductDao {
     }
 
     @Override
-    public int updateProductById(UUID id, Product update) {
+    public int updateProductById(Integer id, Product update) {
         Optional<Product> result = selectProductById(id);
         if (result.isEmpty()) return 0;
-        insertProduct(id, update);
+        productsRepository.save(new Product(id, update.getName(), update.getSource(),
+                update.getStatus(), update.getCount()));
         return 1;
     }
 }
