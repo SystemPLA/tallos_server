@@ -1,5 +1,9 @@
 package ru.systempla.talos_server.model;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.GeneratorType;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,19 +20,19 @@ public class Product {
     public Product() {
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
+    public Integer getId() {
+        return id;
+    }
+
     public Product(Integer id, String name, String source, String status, long count) {
         this.id = id;
         this.name = name;
         this.source = source;
         this.status = status;
         this.count = count;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id", nullable = false)
-    public Integer getId() {
-        return id;
     }
 
     @Column(name = "product_name", nullable = false)

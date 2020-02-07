@@ -45,7 +45,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id", nullable = false)
+    @Column(name = "order_id")
     public Integer getOrderId() {
         return orderId;
     }

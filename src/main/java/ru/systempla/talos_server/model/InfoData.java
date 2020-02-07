@@ -27,7 +27,7 @@ public class InfoData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "info_id", nullable = false)
+    @Column(name = "info_id")
     public Integer getInfoId() {
         return infoId;
     }
