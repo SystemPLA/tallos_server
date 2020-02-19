@@ -1,13 +1,14 @@
 package ru.systempla.talos_server.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "operations")
 public class StorageOperation {
 
     private int id;
-    private String date;
+    private LocalDate date;
     private String customerName;
     private String type;
     private boolean isPerformed;
@@ -36,7 +37,7 @@ public class StorageOperation {
         return id;
     }
 
-    public StorageOperation(int id, String date, String customerName, String type,
+    public StorageOperation(int id, LocalDate date, String customerName, String type,
                             boolean isPerformed, int stairsFrameCount, int passFrameCount,
                             int diagonalConnectionCount, int horizontalConnectionCount,
                             int crossbarCount, int deckCount, int supportsCount,
@@ -65,7 +66,7 @@ public class StorageOperation {
     }
 
     @Column(name = "date")
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -158,7 +159,7 @@ public class StorageOperation {
         this.id = id;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
